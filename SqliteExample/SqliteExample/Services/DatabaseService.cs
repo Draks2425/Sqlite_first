@@ -18,15 +18,15 @@ namespace SqliteExample.Services
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<Person>().Wait();
         }
-        // INSERT
-        public Task<int> AddPersonAsync(Person person)
-        {
-            return _database.InsertAsync(person);
-        }
         // SELECT
         public Task<List<Person>> GetPeopleAsync()
         {
             return _database.Table<Person>().ToListAsync();
+        }
+        // INSERT
+        public Task<int> AddPersonAsync(Person person)
+        {
+            return _database.InsertAsync(person);
         }
         // DELETE
         public Task<int> DeletePersonAsync(Person person)

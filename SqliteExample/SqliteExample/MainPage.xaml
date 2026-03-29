@@ -3,13 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SqliteExample.MainPage">
 
-    <StackLayout>
+    <StackLayout Padding="10" Spacing="5">
+        <Label Text="PC Builder" FontSize="24" FontAttributes="Bold"/>
+        
+        <Label Text="Nowa konfiguracja:" FontSize="16" FontAttributes="Bold"/>
+        <Entry Placeholder="GPU" Text="{Binding CurrentGPU}"/>
+        <Entry Placeholder="CPU" Text="{Binding CurrentCPU}"/>
+        <Picker Title="RAM" ItemsSource="{Binding RAMOptions}" SelectedItem="{Binding CurrentRAM}"/>
+        <Picker Title="Kolor" ItemsSource="{Binding ColorOptions}" SelectedItem="{Binding CurrentColor}"/>
+        
+        <StackLayout Orientation="Horizontal" Spacing="5">
+            <Button Text="{Binding ButtonText}" Clicked="OnAddPC_Clicked" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Anuluj" Clicked="OnCancel_Clicked" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsEditing}"/>
+        </StackLayout>
+
+        <Label Text="Zestawy:" FontSize="16" FontAttributes="Bold" Margin="0,10,0,0"/>
+
         <CollectionView ItemsSource="{Binding PeopleList}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label Text="{Binding Name}" FontSize="20" />
-                        <Label Text="{Binding Age}" FontSize="20" Margin="10,0,0,0" />
+                    <StackLayout Padding="10" Spacing="3">
+                        <Label Text="{Binding GPU, StringFormat='GPU: {0}'}" FontSize="14"/>
+                        <Label Text="{Binding CPU, StringFormat='CPU: {0}'}" FontSize="14"/>
+                        <Label Text="{Binding RAM, StringFormat='RAM: {0}GB'}" FontSize="14"/>
+                        <Label Text="{Binding CaseColor, StringFormat='Kolor: {0}'}" FontSize="14"/>
+                        
+                        <StackLayout Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
+                            <Button Text="Edytuj" Clicked="OnEdit_Clicked" HorizontalOptions="FillAndExpand" FontSize="12"/>
+                            <Button Text="Usuń" Clicked="OnDelete_Clicked" HorizontalOptions="FillAndExpand" FontSize="12"/>
+                        </StackLayout>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
