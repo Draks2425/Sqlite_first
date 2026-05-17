@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SqliteExample.Services;
+using SqliteExample.ViewModels;
+using SqliteExample.Views;
 
 namespace SqliteExample
 {
@@ -17,6 +19,9 @@ namespace SqliteExample
                 });
 
             builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<PcDetailPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
